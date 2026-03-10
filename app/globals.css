@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oxygen+Mono&display=swap');
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --inner-teext: #5A5A5A;
+  --header-text: #E9E9E9;
+  --footer-color: #B5B6C6;
+}
+@font-face {
+  font-family: 'Satoshi'; /* The name you will use in Tailwind */
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-display: swap; /* for faaster load speed */
+}
