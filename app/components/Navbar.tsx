@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-transparent sticky top-0 w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-4 ">
+      <div className="max-w-7xl mx-auto px- sm:px- ">
         <div className="flex justify-between h-16 items-center">
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">

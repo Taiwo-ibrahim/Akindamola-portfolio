@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -17,6 +17,24 @@ if (typeof window !== "undefined") {
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
+  const [showComponent, setShowComponent] = useState(false)
+  
+  
+  useEffect(() => {
+    const onLoaded = () => {
+      setTimeout(() => setShowComponent(true), 9000);
+    };
+
+    // If page already loaded → run instantly
+    if (document.readyState === "complete") {
+      onLoaded();
+    } else {
+      // Otherwise wait for load event
+      window.addEventListener("load", onLoaded);
+      return () => window.removeEventListener("load", onLoaded);
+    }
+  }, []);
+
 
   useGSAP(() => {
     const runScramble = (el: HTMLElement, delay: number = 0) => {
@@ -61,7 +79,7 @@ export default function Home() {
 
       ScrollTrigger.create({
         trigger: el,
-        start: "top 95%", // Play when element top hits 95% of screen
+        start: "top 95%", // Play when eleme  nt top hits 95% of screen
         onEnter: () => {
           currentInterval = startAnimation();
         },
@@ -86,7 +104,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black bg-gradient-to-br from-gray-900 via-black to-black">
-      <div className="md:pt-[30px] w-[95%] mx-auto">
+      <div className="md:pt-[30px] w-[90%] mx-auto">
         <Navbar />
       </div>
 
@@ -109,15 +127,22 @@ export default function Home() {
         />
         </h2>
 
-        <p className="hero-reveal font-Satoshi mt-2 md:mt-[10px] text-[#C5C3C3] tracking-tight w-full md:w-[85%] lg:w-[80%] max-w-[1000px] font-normal text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed mb-2">
-          With hands-on IT and Salesforce experience, I design not just for users — but for the systems and teams behind the scenes too.
-          
-        </p>
+        {showComponent && 
+          (
+          <div  className="">
+            <p className="animate-fadeIn hero-reveal font-Satoshi mt-2 md:mt-[10px] text-[#C5C3C3] tracking-tight w-full md:w-[85%] lg:w-[80%] max-w-[1000px] font-normal text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed mb-2">
+              With hands-on IT and Salesforce experience, I design not just for users — but for the systems and teams behind the scenes too.
+            
+            </p>
 
-        <small className="hero-reveal font-Satoshi text-[#B2B2B2] tracking-tight w-full md:w-[80%] max-w-[1000px] font-normal text-[12px] md:text-[14px] leading-relaxed">
-          Experience: Tangerine Africa, Neukleos, CRM Sharks, Image & Time, Nexant Constructing
-          
-        </small>
+            <small className="hero-reveal font-Satoshi text-[#B2B2B2] tracking-tight w-full md:w-[80%] max-w-[1000px] font-normal text-[12px] md:text-[14px] leading-relaxed">
+              Experience: Tangerine Africa, Neukleos, CRM Sharks, Image & Time, Nexant Constructing
+              
+            </small>
+          </div>
+          )
+        }
+        
       </div>
 
       <div><WorkSection /></div>

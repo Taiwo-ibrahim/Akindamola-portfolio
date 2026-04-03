@@ -274,12 +274,12 @@ export default function Backyard() {
 
     return (
         <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-black">
-            <div className="md:pt-[30px] w-[95%] mx-auto">
+            <div className="md:pt-[30px] w-[90%] mx-auto">
                 <Navbar />
             </div>
 
             <main className="bg-inherit text-white px-3 md:px-12 md:py-20 py-3">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl  mx-auto">
                     
                     {/* Header Section */}
                     <section className="mb-12">

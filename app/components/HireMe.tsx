@@ -219,7 +219,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="bg-black text-white md:py-20 py-10 px-6 md:px-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl w-[95%] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Side */}
