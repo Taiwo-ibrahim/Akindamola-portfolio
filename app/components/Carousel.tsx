@@ -1,47 +1,61 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
 
+import { useRef } from "react";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-const galleryImages = [
-    { id: 1, src: 'https://2oxn8epyl7.ucarecd.net/a063e6dc-fdc6-4e7f-9035-24ba54bcd213/akindamola2.png', alt: 'Portrait' },
-    { id: 2, src: 'https://2oxn8epyl7.ucarecd.net/911bc26c-ec93-4b83-9bd2-801ffa16fc25/akindamola3.png', alt: 'Gym session' },
-    { id: 3, src: 'https://2oxn8epyl7.ucarecd.net/46e30545-5824-4331-8381-a2a86981850c/group_photo.png', alt: 'Group photo' },
-    { id: 4, src: 'https://2oxn8epyl7.ucarecd.net/6aa02f9f-1a0b-4a29-a0f9-3120ac4882c6/Artbook.png', alt: 'African Art book' },
-    { id: 5, src: 'https://2oxn8epyl7.ucarecd.net/ae0404bd-1d2d-4273-8e52-536091fe8443/microphone.png', alt: 'Studio session' },
-    { id: 6, src: 'https://2oxn8epyl7.ucarecd.net/4cd4e3a6-c550-4368-a01b-3e450f2c8a6f/model_smile.png', alt: 'Relaxing' },
-  ];
-  
-export const BackyardCarousel = () => {
+const Carousel = ({ images }: { images: string[] }) => {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="w-full overflow-hidden cursor-grab active:cursor-grabbing py-10">
-      <motion.div 
-        drag="x" 
-        dragConstraints={{ right: 0, left: -800 }} // Adjust 'left' based on total width
-        className="flex gap-4 px-4 md:px-12"
+    <div className="relative w-full">
+      {/* Left Arrow */}
+      <button
+        onClick={scrollLeft}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
       >
-        {galleryImages.map((img) => (
-          <motion.div 
-            key={img.id}
-            className="min-w-[200px] md:min-w-[280px] aspect-[3/4] overflow-hidden bg-[#111] rounded-sm flex-shrink-0"
-            whileHover={{ scale: 0.98 }}
-            transition={{ duration: 0.3 }}
+        <IoChevronBack size={20} />
+      </button>
+
+      {/* Carousel Container */}
+      <div
+        ref={scrollRef}
+        className="flex gap-3 overflow-x-scroll scrollbar-hide scroll-smooth px-10"
+      >
+        {images.map((src, i) => (
+          <div
+            key={i}
+            className="min-w-[180px] sm:min-w-[200px] md:min-w-[230px] lg:min-w-[250px] aspect-[3/4] bg-gray-700 rounded overflow-hidden"
           >
-            <img 
-              src={img.src} 
-              alt={img.alt} 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 pointer-events-none" 
+            <img
+              src={src}
+              alt=""
+              className="w-full h-full object-cover"
             />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
-      
-      {/* Scroll indicator for UX */}
-      <div className="mt-6 flex justify-center gap-2 opacity-20">
-        <div className="h-1 w-12 bg-white rounded-full" />
-        <div className="h-1 w-4 bg-white/50 rounded-full" />
-        <div className="h-1 w-4 bg-white/50 rounded-full" />
       </div>
+
+      {/* Right Arrow */}
+      <button
+        onClick={scrollRight}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
+      >
+        <IoChevronForward size={20} />
+      </button>
     </div>
   );
 };
+
+export default Carousel;

@@ -217,18 +217,42 @@
 
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+// import { BackyardCarousel } from '../components/Carousel';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin'; // Required for typewriter effect
 import { ContactSection } from "../components/HireMe";
 import Navbar from "../components/Navbar";
+import Carousel from '../components/Carousel';
 
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-export default function Backyard() {
+export default function Backyard({images}: {images: string[]}) {
+
+    images = [
+        'https://2oxn8epyl7.ucarecd.net/911bc26c-ec93-4b83-9bd2-801ffa16fc25/akindamola3.png',
+        'https://2oxn8epyl7.ucarecd.net/a063e6dc-fdc6-4e7f-9035-24ba54bcd213/akindamola2.png',
+        'https://2oxn8epyl7.ucarecd.net/46e30545-5824-4331-8381-a2a86981850c/group_photo.png',
+        'https://2oxn8epyl7.ucarecd.net/6aa02f9f-1a0b-4a29-a0f9-3120ac4882c6/Artbook.png',
+        'https://2oxn8epyl7.ucarecd.net/ae0404bd-1d2d-4273-8e52-536091fe8443/microphone.png',
+        'https://2oxn8epyl7.ucarecd.net/4cd4e3a6-c550-4368-a01b-3e450f2c8a6f/model_smile.png',
+        'https://2oxn8epyl7.ucarecd.net/184ee030-abce-41d4-b045-6d0617c314d2/Frame1984079326.png',
+        'https://2oxn8epyl7.ucarecd.net/d5efc8bc-a774-470a-9ddc-1347bad66b13/Frame1984079324.png',
+        'https://2oxn8epyl7.ucarecd.net/f4accaa8-f1f2-4478-ad14-dc0b0b8ad1b6/Frame19840793231.png',
+        'https://2oxn8epyl7.ucarecd.net/ebda2653-f64a-4acf-935c-1745156a1f49/Frame1984079322.png',
+        'https://2oxn8epyl7.ucarecd.net/28799228-d074-424d-a268-eab631fc494e/Frame1984079325.png'
+    ]
+
+    const [showSecond, setShowSecond] = useState(false);
+
+    useEffect(() => {
+    const timer = setTimeout(() => setShowSecond(true), 10500);
+    return () => clearTimeout(timer);
+    }, []); 
+
     const containerRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -263,22 +287,14 @@ export default function Backyard() {
         });
     }, { scope: containerRef });
 
-    const galleryImages = [
-        { id: 1, src: 'https://2oxn8epyl7.ucarecd.net/a063e6dc-fdc6-4e7f-9035-24ba54bcd213/akindamola2.png', alt: 'Portrait' },
-        { id: 2, src: 'https://2oxn8epyl7.ucarecd.net/911bc26c-ec93-4b83-9bd2-801ffa16fc25/akindamola3.png', alt: 'Gym session' },
-        { id: 3, src: 'https://2oxn8epyl7.ucarecd.net/46e30545-5824-4331-8381-a2a86981850c/group_photo.png', alt: 'Group photo' },
-        { id: 4, src: 'https://2oxn8epyl7.ucarecd.net/6aa02f9f-1a0b-4a29-a0f9-3120ac4882c6/Artbook.png', alt: 'African Art book' },
-        { id: 5, src: 'https://2oxn8epyl7.ucarecd.net/ae0404bd-1d2d-4273-8e52-536091fe8443/microphone.png', alt: 'Studio session' },
-        { id: 6, src: 'https://2oxn8epyl7.ucarecd.net/4cd4e3a6-c550-4368-a01b-3e450f2c8a6f/model_smile.png', alt: 'Relaxing' },
-    ];
-
+    
     return (
         <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-black">
             <div className="md:pt-[30px] w-[90%] mx-auto">
                 <Navbar />
             </div>
 
-            <main className="bg-inherit text-white px-3 md:px-12 md:py-20 py-3">
+            <main className="w-[95%] mx-auto bg-inherit text-white px-3 md:px-12 md:py-12 py-3">
                 <div className="max-w-7xl  mx-auto">
                     
                     {/* Header Section */}
@@ -286,15 +302,17 @@ export default function Backyard() {
                         {/* We leave the h1 empty so GSAP can "type" the text into it */}
                         <h1 
                             ref={headingRef} 
-                            className="font-Satoshi text-[24px] md:text-[30px] leading-tight text-[#E9E9E9] max-w-5xl mb-4 min-h-[100px]"
+                            className="font-Satoshi text-[22px] md:text-[26px] leading-tight text-[#E9E9E9] max-w-5xl mb-4 min-h-[100px]"
                         ></h1>
-                        <p className="reveal font-Satoshi text-xs text-[#B2B2B2] uppercase tracking-widest">
-                            Skills: UI/UX design, Brand Design, Product Design, Graphic Design, Sales...
-                        </p>
+                        {showSecond && (
+                            <p className="reveal font-Satoshi text-xs text-[#B2B2B2] uppercase tracking-widest">
+                                Skills: UI/UX design, Brand Design, Product Design, Graphic Design, Sales...
+                            </p>
+                        )}
                     </section>
 
                     {/* Gallery Section */}
-                    <section className="reveal grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-20">
+                    {/* <section className="reveal grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-20">
                         {galleryImages.map((img) => (
                             <div key={img.id} className="gallery-item aspect-[3/4] overflow-hidden bg-[#111] rounded-sm">
                                 <img 
@@ -304,13 +322,17 @@ export default function Backyard() {
                                 />
                             </div>
                         ))}
+                    </section> */}
+                    <section className='max-w-[1200px] mx-auto mt-10'>
+                          {/* <BackyardCarousel />   */}
+                        <Carousel images={images} />
                     </section>
 
                     {/* Story Section */}
                     <section className="reveal bg-black py-2 flex justify-center items-center">
                         <div className=" w-full bg-black/40 backdrop-blur-sm">
-                            <div className="space-y-6 text-gray-300 font-sans text-sm md:text-base lg:text-lg leading-relaxed">
-                                <p>
+                            <div className="space-y-6 text-gray-300 font-sans text-sm md:text-[18px] lg:tet-lg leading-relaxed">
+                                <p className='text-[18px]'>
                                     I discovered design in 2022, after university. Even without a strong background in 
                                     sketching, drawing, digital design gave me a way to solve real-life problems visually.
                                 </p>
@@ -386,61 +408,61 @@ export default function Backyard() {
                         </div>
                     </section> */}
 
-<section className="reveal bg-black py-12 md:py-16 px-6 md:px-12">
-    <div className="max-w-5xl mx-auto">
-        <h2 className="text-white text-lg md:text-xl font-bold mb-6">Skills</h2>
-        
-        <div className="flex flex-col gap-4 md:gap-[25px]">
-            
-            {/* Row 1: 3-column layout */}
-            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
-                <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Web Design</p>
-                </span>
-                <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Product Design</p>
-                </span>
-                <span className="basis-full sm:basis-full md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">No-Code Development</p>
-                </span>
-            </div>
+                    <section className="reveal bg-black py-12 md:py-16 px-6 md:px-12">
+                        <div className="max-w-5xl mx-auto">
+                            <h2 className="text-white text-lg md:text-xl font-bold mb-6">Skills</h2>
+                            
+                            <div className="flex flex-col gap-4 md:gap-[25px]">
+                                
+                                {/* Row 1: 3-column layout */}
+                                <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
+                                    <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Web Design</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Product Design</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-full md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">No-Code Development</p>
+                                    </span>
+                                </div>
 
-            {/* Row 2: 2-column layout */}
-            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
-                <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base text-center">Salesforce Administration</p>
-                </span>
-                <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Graphic Design</p>
-                </span>
-            </div>
+                                {/* Row 2: 2-column layout */}
+                                <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
+                                    <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base text-center">Salesforce Administration</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Graphic Design</p>
+                                    </span>
+                                </div>
 
-            {/* Row 3: 3-column layout */}
-            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
-                <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Illustration</p>
-                </span>
-                <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Prototyping</p>
-                </span>
-                <span className="basis-full sm:basis-full md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Product Thinking</p>
-                </span>
-            </div>
+                                {/* Row 3: 3-column layout */}
+                                <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
+                                    <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Illustration</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-[48%] md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Prototyping</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-full md:basis-[33%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">Product Thinking</p>
+                                    </span>
+                                </div>
 
-            {/* Row 4: 2-column layout */}
-            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
-                <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">UX Research</p>
-                </span>
-                <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
-                    <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">And Many More</p>
-                </span>
-            </div>
+                                {/* Row 4: 2-column layout */}
+                                <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-[18px] items-center justify-between w-full">
+                                    <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">UX Research</p>
+                                    </span>
+                                    <span className="basis-full sm:basis-[48%] md:basis-[50%] border border-zinc-800 rounded-lg py-3 px-4 md:py-4 md:px-6 flex justify-center items-center text-gray-300 hover:border-zinc-500 transition-colors cursor-default">
+                                        <p className="satoshi font-bold text-[#E9E9E9] text-xs sm:text-sm md:text-base">And Many More</p>
+                                    </span>
+                                </div>
 
-        </div>
-    </div>
-</section>
+                            </div>
+                        </div>
+                    </section>
 
                     {/* Learning List */}
                     <section className="reveal border-t border-white/5 md:pt-12 pt-3">
@@ -462,7 +484,7 @@ export default function Backyard() {
             </main>
 
             {/* Founder Chapter Section */}
-            <section className="reveal bg-black py-16 px-6">
+            <section className="w-[95%] mx-auto reveal bg-black py-16 px-6">
                 <div className="w-[95%] mx-auto">
                     <h2 className="text-white text-xl font-bold mb-8">Founder Chapter - Building Subsi</h2>
                     <div className="space-y-6 text-[#F5F5F5] text-sm md:text-base leading-relaxed">
