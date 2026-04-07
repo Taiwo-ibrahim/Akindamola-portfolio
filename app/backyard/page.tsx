@@ -332,7 +332,7 @@ export default function Backyard({images}: {images: string[]}) {
                     <section className="reveal bg-black py-2 flex justify-center items-center">
                         <div className=" w-full bg-black/40 backdrop-blur-sm">
                             <div className="space-y-6 text-gray-300 font-sans text-sm md:text-[18px] lg:tet-lg leading-relaxed">
-                                <p className='text-[18px]'>
+                                <p className='text-[18px] mt-[40px]'>
                                     I discovered design in 2022, after university. Even without a strong background in 
                                     sketching, drawing, digital design gave me a way to solve real-life problems visually.
                                 </p>
@@ -484,7 +484,7 @@ export default function Backyard({images}: {images: string[]}) {
             </main>
 
             {/* Founder Chapter Section */}
-            <section className="w-[95%] mx-auto reveal bg-black py-16 px-6">
+            <section className="w-[100%] md:w-[95%] mx-auto reveal bg-black py-16 px-4 md:px-6">
                 <div className="w-[95%] mx-auto">
                     <h2 className="text-white text-xl font-bold mb-8">Founder Chapter - Building Subsi</h2>
                     <div className="space-y-6 text-[#F5F5F5] text-sm md:text-base leading-relaxed">
