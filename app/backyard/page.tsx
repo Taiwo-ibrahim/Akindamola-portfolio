@@ -257,7 +257,7 @@ export default function Backyard({images}: {images: string[]}) {
     const headingRef = useRef<HTMLHeadingElement>(null);
 
     // The full text for your typewriter animation
-    const headerText = "I’m a Designer with 3 years experience across Web design, Product design and Brand design. I run on vibes, Gym sessions, Liverpool games, Anime and binge watching series. My design philosophy is simple: user-centricity — prioritizing the needs, behaviors, and experience of the end-user.";
+    const headerText = "I'm a Designer with 3 years experience across Web design, Product design and Brand design. I run on vibes, Gym sessions, Liverpool games, Anime and binge watching series. My design philosophy is simple: user-centricity - prioritizing the needs, behaviors, and experience of the end-user.";
 
     useGSAP(() => {
         // 1. Typewriter Animation for the Header
@@ -294,7 +294,7 @@ export default function Backyard({images}: {images: string[]}) {
                 <Navbar />
             </div>
 
-            <main className="w-[95%] mx-auto bg-inherit text-white px-3 md:px-12 md:py-12 py-3">
+            <main className="w-[95%] mx-auto bg-inherit text-white px-3 md:px-3 md:py-8 lg:py-12 py-3">
                 <div className="max-w-7xl  mx-auto">
                     
                     {/* Header Section */}
@@ -302,7 +302,7 @@ export default function Backyard({images}: {images: string[]}) {
                         {/* We leave the h1 empty so GSAP can "type" the text into it */}
                         <h1 
                             ref={headingRef} 
-                            className="font-Satoshi text-[22px] md:text-[26px] leading-tight text-[#E9E9E9] max-w-5xl mb-4 min-h-[100px]"
+                            className="font-Satoshi font-light text-[20px]/[28px] md:text-[24px]/[32px] lg:text-[32px]/[48px] align-middle text-[#E9E9E9] w-[90%]  md:w-[100%] lg:w-[100%] mb-4"
                         ></h1>
                         {showSecond && (
                             <p className="reveal font-Satoshi text-xs text-[#B2B2B2] uppercase tracking-widest">
@@ -311,18 +311,7 @@ export default function Backyard({images}: {images: string[]}) {
                         )}
                     </section>
 
-                    {/* Gallery Section */}
-                    {/* <section className="reveal grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-20">
-                        {galleryImages.map((img) => (
-                            <div key={img.id} className="gallery-item aspect-[3/4] overflow-hidden bg-[#111] rounded-sm">
-                                <img 
-                                    src={img.src} 
-                                    alt={img.alt} 
-                                    className="w-full h-full object-cover hover:grayscale-0 transition-all duration-700 hover:scale-110" 
-                                />
-                            </div>
-                        ))}
-                    </section> */}
+                        {/* Gallery Section */}
                     <section className='max-w-[1200px] mx-auto mt-10'>
                           {/* <BackyardCarousel />   */}
                         <Carousel images={images} />
@@ -475,17 +464,19 @@ export default function Backyard({images}: {images: string[]}) {
                             <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#22C55E] rounded-full"></span> Software Development</li>
                         </ul>
 
-                        <div className="space-y-6 max-w-4xl">
-                            <p>I’m still very much a work in progress. I’m enjoying the process, learning intentionally, and growing one step at a time.</p>
-                            <p className="text-white font-medium">I’ll be documenting this journey as I go — and you’re welcome to follow along.</p>
+                        <div className="space-y-2 lg:space-y-6 max-w-4xl">
+                            <p className="text-white font-normal text-sm md:text-base">I’m still very much a work in progress. I’m enjoying the process, learning intentionally, and growing one step at a time.</p>
+                            <p className="text-white font-medium text-sm md:text-base">
+                                I’ll be documenting this journey as I go — and you’re welcome to follow along.
+                            </p>
                         </div>
                     </section>
                 </div>
             </main>
 
             {/* Founder Chapter Section */}
-            <section className="w-[100%] md:w-[95%] mx-auto reveal bg-black py-16 px-4 md:px-6">
-                <div className="w-[95%] mx-auto">
+            <section className="w-[100%] lg:w-[95%] mx-auto reveal bg-black lg:py-16 py-8 px-4 md:px-6">
+                <div className="w-[97%] mx-auto">
                     <h2 className="text-white text-xl font-bold mb-8">Founder Chapter - Building Subsi</h2>
                     <div className="space-y-6 text-[#F5F5F5] text-sm md:text-base leading-relaxed">
                         <p>
@@ -519,9 +510,9 @@ export default function Backyard({images}: {images: string[]}) {
 
             <ContactSection />
 
-            <footer className="reveal mt-20 w-full border-t border-white/5 pt-8">
-                <div className="bg-[#B2B5C3] py-3 rounded-sm text-black text-[10px] md:text-xs font-Satoshi flex justify-center items-center gap-2 mx-auto w-[100%]">
-                    <span>★</span> Nothing to see here i just wanted a footer <span>★</span>
+            <footer className="mt-32 w-full border-t border-white/5 pt-8">
+                <div className="bg-[#B2B5C3] py-3 rounded-sm text-black text-[10px] md:text-xs font-Satoshi flex justify-center items-center gap-2">
+                <span>★</span> Nothing to see here i just wanted a footer <span>★</span>
                 </div>
             </footer>
         </div>

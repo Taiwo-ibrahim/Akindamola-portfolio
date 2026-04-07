@@ -18,23 +18,39 @@ if (typeof window !== "undefined") {
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
   const [showComponent, setShowComponent] = useState(false)
+  const [showComponent1, setShowComponent1] = useState(false)
   
   
+  // useEffect(() => {
+  //   const onLoaded = () => {
+  //     setTimeout(() => setShowComponent(true), 8600);
+  //   };
+
+  //   // If page already loaded → run instantly
+  //   if (document.readyState === "complete") {
+  //     onLoaded();
+  //   } else {
+  //     // Otherwise wait for load event
+  //     window.addEventListener("load", onLoaded);
+  //     return () => window.removeEventListener("load", onLoaded);
+  //   }
+  // }, []);
+
+
   useEffect(() => {
-    const onLoaded = () => {
-      setTimeout(() => setShowComponent(true), 9000);
-    };
+  const onLoaded = () => {
+    // Subtract enough time for the CSS fade-in to feel natural
+    setTimeout(() => setShowComponent(true), 9000);
+    setTimeout(() => setShowComponent1(true), 9500);
+  };
 
-    // If page already loaded → run instantly
-    if (document.readyState === "complete") {
-      onLoaded();
-    } else {
-      // Otherwise wait for load event
-      window.addEventListener("load", onLoaded);
-      return () => window.removeEventListener("load", onLoaded);
-    }
-  }, []);
-
+  if (document.readyState === "complete") {
+    onLoaded();
+  } else {
+    window.addEventListener("load", onLoaded);
+    return () => window.removeEventListener("load", onLoaded);
+  }
+}, []);
 
   useGSAP(() => {
     const runScramble = (el: HTMLElement, delay: number = 0) => {
@@ -108,10 +124,10 @@ export default function Home() {
         <Navbar />
       </div>
 
-      <div className="w-[90%] md:w-[90%] max-w-7xl flex flex-col mx-auto mt-[20px] md:mt-[68px]">
+      <div className="w-[90%] md:w-[90%] max-w-7xl flex flex-col mx-auto mt-[20px] md:mt-[58px]">
              
         
-        <h2 className="hero-reveal font-Satoshi text-[#E9E9E9] tracking-tight w-full md:w-[90%] lg:w-[80%] max-w-[1000px] font-normal text-[24px] sm:text-[28px] md:text-[32px] leading-tight mb-6">
+        {/* <h2 className="hero-reveal font-Satoshi text-[#E9E9E9] tracking-tight w-full md:w-[90%] lg:w-[80%] max-w-[1000px] font-normal text-[24px] sm:text-[28px] md:text-[32px] leading-tight mb-2">
           <TypeAnimation 
             sequence={[
               `Hi! I'm Akindamola👋🏽 I design experiences. I turn messy, complex problems into clean, delightful digital experiences people can't stop using.`, // Types 'One'
@@ -123,26 +139,48 @@ export default function Home() {
             wrapper="span"
             cursor={false}
             speed={50}
-            style={{ display: 'inline-block', color: '#E9E9E9' }}
-        />
+            style={{ display: 'inline-block', color: '#E9E9E9', fontSize: '37px', fontWeight: 400, lineHeight: '45px' }}
+          />
+        </h2> */}
+
+        <h2 className="hero-reveal font-Satoshi text-[#E9E9E9] tracking-tight w-full md:w-[90%] lg:w-[80%] max-w-[1000px] font-normal leading-tight mb-2">
+          <TypeAnimation
+            sequence={[
+              `Hi! I'm Akindamola👋🏽 I design experiences. I turn messy, complex problems into clean, delightful digital experiences people can't stop using.`,
+              () => {
+                console.log('Sequence completed');
+              },
+            ]}
+            wrapper="span"
+            cursor={false}
+            speed={50}
+            style={{
+              display: 'inline-block',
+              color: '#E9E9E9',
+              fontSize: 'clamp(22px, 4vw, 37px)',
+              fontWeight: 400,
+              lineHeight: 'clamp(30px, 5vw, 45px)',
+            }}
+          />
         </h2>
 
-        {showComponent && 
-          (
-          <div  className="">
-            <p className="animate-fadeIn hero-reveal font-Satoshi mt-2 md:mt-[10px] text-[#C5C3C3] tracking-tight w-full md:w-[85%] lg:w-[80%] max-w-[1000px] font-normal text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed mb-2">
-              With hands-on IT and Salesforce experience, I design not just for users — but for the systems and teams behind the scenes too.
-            
-            </p>
-
-            <small className="hero-reveal font-Satoshi text-[#B2B2B2] tracking-tight w-full md:w-[80%] max-w-[1000px] font-normal text-[12px] md:text-[14px] leading-relaxed">
-              Experience: Tangerine Africa, Neukleos, CRM Sharks, Image & Time, Nexant Constructing
-              
-            </small>
-          </div>
-          )
-        }
         
+
+          <div>
+          {showComponent && (
+            <p className="opacity-100 animate-fade-in [animation-delay:100ms] font-Satoshi mt-2 md:mt-[10px] text-[#C5C3C3] tracking-tight w-full md:w-[85%] lg:w-[80%] max-w-[1000px] font-normal text-[12px] md:text-[16px] sm:text-[18px] md:text-[20px] leading-relaxed mb-2">
+              With hands-on IT and Salesforce experience, I design not just for users — but for the systems and teams behind the scenes too.
+            </p>
+          )}
+
+          {showComponent1 && (
+            <small className="opacity-100 animate-fade-in [animation-delay:300ms] hero-reveal font-Satoshi text-[#B2B2B2] tracking-tight w-full md:w-[80%] max-w-[1000px] font-normal text-[10px] md:text-[12px] md:text-[14px] leading-relaxed">
+              Experience: Tangerine Africa, Neukleos, CRM Sharks, Image & Time, Nexant Constructing
+            </small>
+          )}
+        </div>
+
+
       </div>
 
       <div><WorkSection /></div>

@@ -99,11 +99,11 @@ export const ProjectCard: React.FC<ProjectProps> = ({
       </div>
 
       <div className="flex justify-between items-center mb-2">
-        <h3 className="font-Inter text-xl text-[#E9E9E9] font-medium transition-colors group-hover:text-white">{title}</h3>
-        <span className="font-Inter text-sm text-[#B2B2B2]">{year}</span>
+        <h3 className="font-Inter text-[10px] md:text-[12px] text-[#E9E9E9] font-medium transition-colors group-hover:text-white">{title}</h3>
+        <span className="font-Inter text-[8px] md:text-[10px] text-[#B2B2B2]">{year}</span>
       </div>
 
-      <p className="font-Satoshi text-[#5A5A5A] text-sm leading-relaxed mb-6 line-clamp-2 transition-colors group-hover:text-[#E9E9E9]">
+      <p className="font-Satoshi text-[#5A5A5A] text-[8px] md:text-[10px] leading-relaxed mb-6 line-clamp-2 transition-colors group-hover:text-[#E9E9E9]">
         {description}
       </p>
 
